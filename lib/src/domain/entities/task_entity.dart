@@ -1,45 +1,36 @@
 import 'dart:math';
 
+import 'package:mind_and_second/src/domain/entities/operation_entities.dart';
+
 class Task{
   String? textTask;
   String? taskAnswer;
 
   Task(){
-
-    int value1 = 0;
-    int value2 = 1;
   
     List<String> operations = ["+", "-", "/", "*"];
 
     switch(operations[Random().nextInt(operations.length)])
     {
         case "+":{
-              value1 = Random().nextInt(90) + 10;
-              value2 = Random().nextInt(90) + 10;
-              textTask = "$value1 + $value2";
-              taskAnswer = (value1 + value2).toString();
+              Addition addition = Addition();
+              taskAnswer = addition.realization();
+              textTask = addition.visualization();
             }
         case "-":{
-              while((value1 <= value2)){
-                value1 = Random().nextInt(90) + 10;
-                value2 = Random().nextInt(10) + 2;
-              }
-              textTask = "$value1 - $value2";
-              taskAnswer = (value1 - value2).toString();
+              Subtraction subtraction = Subtraction();
+              taskAnswer = subtraction.realization();
+              textTask = subtraction.visualization();
             }
         case "/":{
-              while((value1 % value2 != 0) || (value1 < value2)){
-                value1 = Random().nextInt(90) + 10;
-                value2 = Random().nextInt(10) + 2;
-              }
-              textTask = "$value1 / $value2";
-              taskAnswer = (value1 / value2).round().toString();
+              Division division = Division();
+              taskAnswer = division.realization();
+              textTask = division.visualization();
             }
         case "*":{
-              value1 = Random().nextInt(10) + 2;
-              value2 = Random().nextInt(10) + 2;
-              textTask = "$value1 * $value2";
-              taskAnswer = (value1 * value2).toString();
+              Multiplication multiplication = Multiplication();
+              taskAnswer = multiplication.realization();
+              textTask = multiplication.visualization();
             }
     }
   }

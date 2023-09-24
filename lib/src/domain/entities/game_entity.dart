@@ -1,26 +1,28 @@
 import 'dart:io';
 
+import 'package:mind_and_second/src/domain/entities/score_entity.dart';
 import 'package:mind_and_second/src/domain/entities/task_entity.dart';
+import 'package:mind_and_second/src/domain/entities/timer_entity.dart';
 
 class Game{
 
-  int _count = 0;
+  Scope scope = Scope();
 
-  void startGame() async{
+  void init(){
       Task task = Task();
+      Timer timer = Timer();
 
       print(task.textTask);
 
-      DateTime time1 = DateTime.now();
+      timer.init();
       String? answer = stdin.readLineSync();
-      DateTime time2 = DateTime.now();
 
-      if (time2.difference(time1).inSeconds <= 10 && answer == task.taskAnswer){  
-        _count += 1;
-        startGame();
+      if (timer.getValue()! <= 10 && answer == task.taskAnswer){  
+        scope.increase;
+        init();
     }
     else{
-      print("Увы, твой счёт: $_count");
+      print("Увы, твой счёт: $scope.get");
     }
   }
 }

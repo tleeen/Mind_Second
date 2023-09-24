@@ -15,7 +15,7 @@ void main(){
   while(gameIndicator == "y"){
 
     Game game = Game();
-    game.startGame();
+    game.init();
 
     print("Введи ${"y"} для начала игры и ${"n"} для выхода");
     
