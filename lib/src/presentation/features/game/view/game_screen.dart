@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
-import '../../../domain/functionalСlasses/task/implementation/task.dart';
-import '../../Widgets/task_widget.dart';
+import '../../../../domain/functionalСlasses/task/interface/interface_task.dart';
+import '../widgets/task.dart';
 
 class GameScreen extends StatelessWidget{
   const GameScreen({super.key});
   
   @override
   Widget build(BuildContext context) {
-    Task task = Task();
+
+    var task = GetIt.I<Interface_Task>();
+
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,

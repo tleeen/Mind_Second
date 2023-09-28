@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 
-import '../../domain/functionalСlasses/task/implementation/task.dart';
+import '../../../../domain/functionalСlasses/task/interface/interface_task.dart';
+
 
 class TaskWidget extends StatefulWidget{
 
@@ -82,7 +84,7 @@ class _TaskWidgetState extends State<TaskWidget>{
   void _checkAnswer(String answer) {
     fieldText.clear();
     setState((){
-      Task task = Task();
+      var task = GetIt.I<Interface_Task>();
       if (answer == _taskAnswer){
         _taskAnswer = task.getAnswerForTask();
         _textTask = task.createTask();

@@ -4,10 +4,10 @@ import '../../operation/implementation/addition.dart';
 import '../../operation/implementation/division.dart';
 import '../../operation/implementation/multiplication.dart';
 import '../../operation/implementation/subtraction.dart';
-import '../interface/Itask.dart';
+import '../interface/interface_task.dart';
 
 
-class Task implements Itask{
+class Task implements Interface_Task{
   String? textTask;
   String? taskAnswer;
 
