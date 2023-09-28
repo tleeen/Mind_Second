@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../../domain/functionalСlasses/task/interface/interface_task.dart';
+import '../../../../domain/functionalClasses/task/interface/interface_task.dart';
 import '../widgets/task.dart';
 
 class GameScreen extends StatelessWidget{
@@ -10,7 +10,7 @@ class GameScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    var task = GetIt.I<Interface_Task>();
+    var task = GetIt.I<InterfaceTask>();
 
     return Scaffold(
         appBar: AppBar(

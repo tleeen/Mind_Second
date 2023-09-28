@@ -6,6 +6,5 @@ import 'src/presentation/mind_second_app.dart';
 void main() {
   
   registrationDependencies();
-
   runApp(const MindSecondApp());
 }

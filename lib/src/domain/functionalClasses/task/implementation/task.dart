@@ -7,7 +7,7 @@ import '../../operation/implementation/subtraction.dart';
 import '../interface/interface_task.dart';
 
 
-class Task implements Interface_Task{
+class Task implements InterfaceTask{
   String? textTask;
   String? taskAnswer;
 

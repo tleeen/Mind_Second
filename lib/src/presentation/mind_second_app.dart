@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/src/presentation/router/routes.dart';
-import 'package:flutter_application/src/presentation/theme/theme.dart';
+
+import 'router/routes.dart';
+import 'theme/theme.dart';
 
 
 class MindSecondApp extends StatelessWidget {

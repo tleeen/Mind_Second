@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../infrastructure/controllers/best_score_controller.dart';
+
 class LoseScreen extends StatefulWidget{
   const LoseScreen({super.key});
 
@@ -8,7 +10,9 @@ class LoseScreen extends StatefulWidget{
 }
 
 class _LoseScreenState extends State<LoseScreen> {
-  int? scope;
+  int? score;
+  int? bestScore;
+  String massage = "Твой рекорд: ";
 
   @override
   void didChangeDependencies(){
@@ -16,9 +20,25 @@ class _LoseScreenState extends State<LoseScreen> {
     assert(args != null && args is int, "Wrong argument type");
 
 
-    scope = args as int?;
-    setState((){});
+    score = args as int?;
     super.didChangeDependencies();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getBestScore();
+  }
+
+   BestScoreController controller = BestScoreController();
+   void getBestScore() async{
+    int bS = (await controller.getBestScore("bestScore"))!;
+    setState(() {
+      bestScore = bS;
+      if(bestScore! == score!){
+        massage = "Новый рекорд: ";
+      }
+    });
   }
 
   @override
@@ -46,7 +66,16 @@ class _LoseScreenState extends State<LoseScreen> {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: Text("Твой счёт: $scope",
+                child: Text("$massage$bestScore",
+                style: const TextStyle(
+                fontSize: 30),
+                textAlign: TextAlign.center
+                )
+              ),
+              if(bestScore != score)
+                Align(
+                alignment: Alignment.bottomCenter,
+                child: Text("Твой счёт: $score",
                 style: const TextStyle(
                 fontSize: 28),
                 textAlign: TextAlign.center

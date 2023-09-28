@@ -1,4 +1,4 @@
-abstract class Interface_Task{
+abstract class InterfaceTask{
   String createTask();
   String getAnswerForTask();
 }

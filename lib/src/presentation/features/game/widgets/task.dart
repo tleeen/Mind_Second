@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../../domain/functionalСlasses/task/interface/interface_task.dart';
+import '../../../../domain/functionalClasses/task/interface/interface_task.dart';
+import '../../../../infrastructure/controllers/best_score_controller.dart';
 
 
 class TaskWidget extends StatefulWidget{
@@ -33,14 +34,25 @@ class _TaskWidgetState extends State<TaskWidget>{
   String timeStr = '10.00';
   int score = 0;
 
+  int? bestScore;
+  BestScoreController controller = BestScoreController();
+
   String _taskAnswer;
   String _textTask;
 
-   @override
+  void getBestScore() async{
+    int _bestScore = (await controller.getBestScore("bestScore"))!;
+    setState(() {
+      bestScore = _bestScore;
+    });
+  }
+
+  @override
   void initState() {
     super.initState();
     _calculationTime();
     start();
+    getBestScore();
   }
 
   void start() {
@@ -53,6 +65,9 @@ class _TaskWidgetState extends State<TaskWidget>{
         _calculationTime();
         if (_waitTime <= 0) {
           timeStr = "0.00";
+          if(score > bestScore!){
+            controller.setBestScore("bestScore", score);
+          }
           Navigator.of(context).pushNamed('/lose',
           arguments: score);
           pause();
@@ -84,7 +99,7 @@ class _TaskWidgetState extends State<TaskWidget>{
   void _checkAnswer(String answer) {
     fieldText.clear();
     setState((){
-      var task = GetIt.I<Interface_Task>();
+      var task = GetIt.I<InterfaceTask>();
       if (answer == _taskAnswer){
         _taskAnswer = task.getAnswerForTask();
         _textTask = task.createTask();
@@ -92,6 +107,9 @@ class _TaskWidgetState extends State<TaskWidget>{
         restart();
       }
       else{
+        if(score > bestScore!){
+            controller.setBestScore("bestScore", score);
+          }
         Navigator.of(context).pushNamed('/lose',
           arguments: score);
         pause();
