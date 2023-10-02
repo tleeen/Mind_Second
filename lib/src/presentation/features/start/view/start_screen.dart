@@ -37,7 +37,7 @@ class StartScreen extends StatelessWidget{
                       style: ElevatedButton.styleFrom(
                         shape: const CircleBorder(),
                       ),
-                      child: const Icon(Icons.start),
+                      child: const Icon(Icons.play_arrow),
                       ),
                   ),
               ),

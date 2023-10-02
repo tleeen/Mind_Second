@@ -6,4 +6,4 @@ final routes = {
         "/" : (context) => const StartScreen(),
         "/game" : (context) => const GameScreen(),
         "/lose" : (context) => const LoseScreen()
-      };
+    };

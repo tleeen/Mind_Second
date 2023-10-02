@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../infrastructure/controllers/best_score_controller.dart';
+import '../../../../infrastructure/controllers/impl/best_score_controller.dart';
 
 class LoseScreen extends StatefulWidget{
   const LoseScreen({super.key});

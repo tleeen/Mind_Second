@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../../domain/functionalClasses/task/interface/interface_task.dart';
-import '../../../../infrastructure/controllers/best_score_controller.dart';
+import '../../../../infrastructure/controllers/interface/interface_best_score_controller.dart';
 
 
 class TaskWidget extends StatefulWidget{
@@ -35,13 +35,13 @@ class _TaskWidgetState extends State<TaskWidget>{
   int score = 0;
 
   int? bestScore;
-  BestScoreController controller = BestScoreController();
+  var bestScoreController = GetIt.I<InterfaceBestScoreController>();
 
   String _taskAnswer;
   String _textTask;
 
   void getBestScore() async{
-    int _bestScore = (await controller.getBestScore("bestScore"))!;
+    int _bestScore = (await bestScoreController.getBestScore("bestScore"))!;
     setState(() {
       bestScore = _bestScore;
     });
@@ -66,7 +66,7 @@ class _TaskWidgetState extends State<TaskWidget>{
         if (_waitTime <= 0) {
           timeStr = "0.00";
           if(score > bestScore!){
-            controller.setBestScore("bestScore", score);
+            bestScoreController.setBestScore("bestScore", score);
           }
           Navigator.of(context).pushNamed('/lose',
           arguments: score);
@@ -108,7 +108,7 @@ class _TaskWidgetState extends State<TaskWidget>{
       }
       else{
         if(score > bestScore!){
-            controller.setBestScore("bestScore", score);
+            bestScoreController.setBestScore("bestScore", score);
           }
         Navigator.of(context).pushNamed('/lose',
           arguments: score);
