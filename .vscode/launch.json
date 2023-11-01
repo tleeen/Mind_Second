@@ -7,19 +7,22 @@
         {
             "name": "Mind&Second",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "program": "lib/src/app/app_entry.dart"
         },
         {
             "name": "Mind&Second (profile mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",
+            "program": "lib/src/app/app_entry.dart"
         },
         {
             "name": "Mind&Second (release mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "release",
+            "program": "lib/src/app/app_entry.dart"
         }
     ]
 }
