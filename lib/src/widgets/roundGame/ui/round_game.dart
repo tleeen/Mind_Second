@@ -3,11 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../entities/score/factory_repository_score.dart';
 import '../../../entities/score/model/best_score.dart';
 import '../../../entities/score/model/round_score.dart';
-import '../../../entities/task/model/task/task.dart';
+import '../../../entities/task/model/task/task_model.dart';
 import '../../../features/enterAndCheckAnswer/ui/input.dart';
-import '../../../shared/localStorage/repository_score.dart';
+import '../../../shared/lib/interface/i_repository_score.dart';
 import '../../../shared/ui/timer/model/timer.dart';
 import '../../../shared/ui/timer/ui/timer.dart';
 
@@ -21,29 +22,36 @@ class TaskWidget extends StatefulWidget{
 class _TaskWidgetState extends State<TaskWidget>{
 
   TextEditingController fieldText = TextEditingController();
-  RepositoryScore repositoryScore = RepositoryScore();
+  IRepositoryScore repositoryScore = FactoryScoreRepository.createInstanceRepository('api');
 
   void initBestScore() async{
       context.read<BestScore>().setBestScore(await repositoryScore.getScore());
     }
 
-    @override
+  @override
   void initState() {
+
     super.initState();
 
-    Future.delayed(Duration.zero,(){
-      context.read<FunctionalTimer>().setWaitTime(10);
+    TaskModel task = context.read<TaskModel>();
+    FunctionalTimer timer = context.read<FunctionalTimer>();
+    RoundScore roundScore = context.read<RoundScore>();
+    BestScore bestScore = context.read<BestScore>();
 
-      context.read<FunctionalTimer>().setCallback(() {
-        if(Provider.of<RoundScore>(context, listen: false).roundScore > Provider.of<BestScore>(context, listen: false).bestScore){
-          repositoryScore.setScore(context.read<RoundScore>().roundScore);
-          Provider.of<BestScore>(context, listen: false).setBestScore(context.read<RoundScore>().roundScore);
+    Future.delayed(Duration.zero,(){
+      timer.setTime(10);
+      timer.setCallback(() {
+        if(roundScore.roundScore > bestScore.bestScore){
+          repositoryScore.setScore(roundScore.roundScore);
+          bestScore.setBestScore(roundScore.roundScore);
           }
           Navigator.of(context).pushNamed('/lose');
         });
-      context.read<Task>().createTask();
-      context.read<RoundScore>().setRoundScore(0);
-      context.read<FunctionalTimer>().start();
+
+      task.createTask();
+      roundScore.setRoundScore(0);
+      timer.start();
+
       initBestScore();
     });
   }
@@ -60,7 +68,7 @@ class _TaskWidgetState extends State<TaskWidget>{
         Align(
           alignment: Alignment.bottomCenter, 
           child: Text(
-            context.watch<Task>().task,
+            context.watch<TaskModel>().task,
             style: const TextStyle(
               fontSize: 34
             ),

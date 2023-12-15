@@ -8,11 +8,11 @@ import '../operations/implementation/multiplication.dart';
 import '../operations/implementation/subtraction.dart';
 import '../operations/interface/operation.dart';
 
-class Task extends ChangeNotifier{
+class TaskModel extends ChangeNotifier{
   late String task;
   late String answerForTask;
 
-  Task(){
+  TaskModel(){
     createTask();
   }
 

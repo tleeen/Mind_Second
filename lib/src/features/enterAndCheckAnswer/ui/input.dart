@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../model/check.dart';
+import '../model/analysis_answer.dart';
 
 class Input extends StatelessWidget{
   final TextEditingController fieldText;
@@ -27,7 +27,7 @@ class Input extends StatelessWidget{
               ),
               controller: fieldText,
               keyboardType: TextInputType.number,
-              onSubmitted: (answer) => {checkAnswer(answer, fieldText, context)}
+              onSubmitted: (answer) => {analysisAnswer(answer, context), fieldText.clear()}
             ),
           )
         );

@@ -4,28 +4,28 @@ import 'package:flutter/material.dart';
 
 class FunctionalTimer extends ChangeNotifier{
 
-  double time = 10;
-  double waitTime = 10;
+  late double time;
+  late double _waitTime;
   double percent = 1.0;
-  bool isStart = true;
-  String timeStr = "10:00";
+  String timeStr = '';
 
-  late Timer timer;
-  late BuildContext context;
-  late Function callback;
+  late Timer _timer;
+  late Function _callback;
+
+  void setTime(double value){
+        timeStr = "$value";
+        time = value;
+        _waitTime = value;
+        notifyListeners();
+  }
 
   void setWaitTime(double value){
-        waitTime = value;
+        _waitTime = value;
         notifyListeners();
   }
 
   void setPercent(double value){
         percent = value;
-        notifyListeners();
-  }
-
-  void setIsStart(bool value){
-        isStart = value;
         notifyListeners();
   }
 
@@ -35,35 +35,37 @@ class FunctionalTimer extends ChangeNotifier{
   }
 
   void setCallback(Function action){
-        callback = action;
+        _callback = action;
         notifyListeners();
   }
   
-  void calculationTime() {
-      setPercent(waitTime / 10);
-      setTimeStr((waitTime % 60).toStringAsFixed(1));
+  void _calculationTime() {
+      setPercent(_waitTime / 10);
+      setTimeStr((_waitTime % 60).toStringAsFixed(1));
       notifyListeners();
     }
 
     void restart() {
       setWaitTime(time);
-      calculationTime();
+      _calculationTime();
       notifyListeners();
     }
 
     void pause() {
-      timer.cancel();
-      setIsStart(false);
+      _timer.cancel();
+        setPercent(1.0);
+        setTimeStr("$time");
+        setWaitTime(time);
       notifyListeners();
     }
     
     void start(){
-        timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-          setWaitTime(waitTime - 0.1);
-          calculationTime();
-          if (waitTime <= 0) {
-            setTimeStr("0.00");
-            callback();
+        _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+          setWaitTime(_waitTime - 0.1);
+          _calculationTime();
+          if (_waitTime <= 0) {
+            setTimeStr("0.0");
+            _callback();
             pause();
           }
         });
