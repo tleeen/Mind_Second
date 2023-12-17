@@ -1,6 +1,6 @@
-import '../../shared/api/web_repository_score.dart' as API;
-import '../../shared/lib/interface/i_repository_score.dart';
-import '../../shared/lib/localStorage/repository_score.dart' as LocalStorage;
+import '../../../shared/api/web_repository_score.dart' as API;
+import '../../../shared/lib/interface/i_repository_score.dart';
+import '../../../shared/lib/localStorage/repository_score.dart' as LocalStorage;
 
 class FactoryScoreRepository {
   

@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import '../../../shared/lib/interface/i_repository_score.dart';
-import '../factory_repository_score.dart';
+import '../lib/factory_repository_score.dart';
 
 class BestScore extends ChangeNotifier{
 
