@@ -7,8 +7,8 @@ import '../../../entities/score/model/best_score.dart';
 import '../../../entities/score/model/round_score.dart';
 import '../../../entities/task/model/task/task_model.dart';
 import '../../../features/enterAndCheckAnswer/ui/input.dart';
-import '../../../shared/ui/timer/model/timer.dart';
-import '../../../shared/ui/timer/ui/timer.dart';
+import '../../../entities/timer/model/timer.dart';
+import '../../../entities/timer/ui/timer.dart';
 
 class TaskWidget extends StatefulWidget{
   const TaskWidget({ super.key});

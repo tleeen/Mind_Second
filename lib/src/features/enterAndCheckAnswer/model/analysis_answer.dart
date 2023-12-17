@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../entities/score/model/best_score.dart';
 import '../../../entities/score/model/round_score.dart';
 import '../../../entities/task/model/task/task_model.dart';
-import '../../../shared/ui/timer/model/timer.dart';
+import '../../../entities/timer/model/timer.dart';
 
 void analysisAnswer(String answer, BuildContext context) {
 

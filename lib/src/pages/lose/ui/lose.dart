@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../entities/score/model/best_score.dart';
 import '../../../entities/score/model/round_score.dart';
-import '../../../shared/ui/button/ui/button.dart';
+import '../../../shared/ui/button.dart';
 
 
 class LoseScreen extends StatelessWidget{

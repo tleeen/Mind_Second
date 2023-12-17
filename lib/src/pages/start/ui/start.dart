@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/ui/button/ui/button.dart';
+import '../../../shared/ui/button.dart';
 
 class StartScreen extends StatelessWidget{
   const StartScreen({super.key});
