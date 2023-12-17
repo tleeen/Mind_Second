@@ -3,12 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../entities/score/factory_repository_score.dart';
 import '../../../entities/score/model/best_score.dart';
 import '../../../entities/score/model/round_score.dart';
 import '../../../entities/task/model/task/task_model.dart';
 import '../../../features/enterAndCheckAnswer/ui/input.dart';
-import '../../../shared/lib/interface/i_repository_score.dart';
 import '../../../shared/ui/timer/model/timer.dart';
 import '../../../shared/ui/timer/ui/timer.dart';
 
@@ -22,10 +20,9 @@ class TaskWidget extends StatefulWidget{
 class _TaskWidgetState extends State<TaskWidget>{
 
   TextEditingController fieldText = TextEditingController();
-  IRepositoryScore repositoryScore = FactoryScoreRepository.createInstanceRepository('api');
 
   void initBestScore() async{
-      context.read<BestScore>().setBestScore(await repositoryScore.getScore());
+      context.read<BestScore>().initBestScore();
     }
 
   @override
@@ -42,7 +39,6 @@ class _TaskWidgetState extends State<TaskWidget>{
       timer.setTime(10);
       timer.setCallback(() {
         if(roundScore.roundScore > bestScore.bestScore){
-          repositoryScore.setScore(roundScore.roundScore);
           bestScore.setBestScore(roundScore.roundScore);
           }
           Navigator.of(context).pushNamed('/lose');

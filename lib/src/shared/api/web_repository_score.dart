@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../lib/deviceId/device_id.dart';
 import '../lib/interface/i_repository_score.dart';
 
-class ServiceScore implements IRepositoryScore{
+class WebRepositoryScore implements IRepositoryScore{
 
     @override
       Future<int> getScore() async {
