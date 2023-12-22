@@ -12,8 +12,8 @@ class LoseScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    int bestScore = context.watch<BestScore>().bestScore;
-    int roundScore = context.watch<RoundScore>().roundScore;
+    int bestScore = context.read<BestScore>().bestScore;
+    int roundScore = context.read<RoundScore>().roundScore;
 
     return Scaffold(
         appBar: AppBar(

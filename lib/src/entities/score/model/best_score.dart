@@ -7,15 +7,15 @@ class BestScore extends ChangeNotifier{
 
   late int bestScore;
 
-  IRepositoryScore repositoryScore = FactoryScoreRepository.createInstanceRepository('api');
+  final IRepositoryScore _repositoryScore = FactoryScoreRepository.createInstanceRepository('ls');
 
   void setBestScore(int score){
     bestScore = score;
-    repositoryScore.setScore(score);
+    _repositoryScore.setScore(score);
     notifyListeners();
   }
 
   Future<void> initBestScore() async {
-    bestScore = await repositoryScore.getScore();
+    bestScore = await _repositoryScore.getScore();
   }
 } 

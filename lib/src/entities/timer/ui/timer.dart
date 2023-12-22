@@ -25,7 +25,7 @@ class TimerWidget extends StatelessWidget{
               ),
               Positioned(
                 child: Text(
-                  context.read<FunctionalTimer>().timeStr,
+                  context.watch<FunctionalTimer>().timeStr,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 30,

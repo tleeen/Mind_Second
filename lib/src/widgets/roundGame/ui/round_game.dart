@@ -19,14 +19,8 @@ class TaskWidget extends StatefulWidget{
 
 class _TaskWidgetState extends State<TaskWidget>{
 
-  TextEditingController fieldText = TextEditingController();
-
-  void initBestScore() async{
-      context.read<BestScore>().initBestScore();
-    }
-
   @override
-  void initState() {
+  void initState(){
 
     super.initState();
 
@@ -35,7 +29,7 @@ class _TaskWidgetState extends State<TaskWidget>{
     RoundScore roundScore = context.read<RoundScore>();
     BestScore bestScore = context.read<BestScore>();
 
-    Future.delayed(Duration.zero,(){
+    Future.delayed(Duration.zero,() async {
       timer.setTime(10);
       timer.setCallback(() {
         if(roundScore.roundScore > bestScore.bestScore){
@@ -48,12 +42,14 @@ class _TaskWidgetState extends State<TaskWidget>{
       roundScore.setRoundScore(0);
       timer.start();
 
-      initBestScore();
+      await bestScore.initBestScore();
     });
   }
 
   @override
   Widget build(BuildContext context) {
+
+    TextEditingController fieldText = TextEditingController();
 
     return Column(
       textDirection: TextDirection.ltr,

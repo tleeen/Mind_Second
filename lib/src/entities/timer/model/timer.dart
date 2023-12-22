@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class FunctionalTimer extends ChangeNotifier{
 
-  late double time;
+  late double _time;
   late double _waitTime;
   double percent = 1.0;
   String timeStr = '';
@@ -14,7 +14,7 @@ class FunctionalTimer extends ChangeNotifier{
 
   void setTime(double value){
         timeStr = "$value";
-        time = value;
+        _time = value;
         _waitTime = value;
         notifyListeners();
   }
@@ -46,7 +46,7 @@ class FunctionalTimer extends ChangeNotifier{
     }
 
     void restart() {
-      setWaitTime(time);
+      setWaitTime(_time);
       _calculationTime();
       notifyListeners();
     }
@@ -54,8 +54,8 @@ class FunctionalTimer extends ChangeNotifier{
     void pause() {
       _timer.cancel();
         setPercent(1.0);
-        setTimeStr("$time");
-        setWaitTime(time);
+        setTimeStr("$_time");
+        setWaitTime(_time);
       notifyListeners();
     }
     
